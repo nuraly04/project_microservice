@@ -4,7 +4,7 @@ import com.example.project_microservice.dto.project.ProjectCreateDto;
 import com.example.project_microservice.dto.project.ProjectDto;
 import com.example.project_microservice.dto.project.ProjectFilterDto;
 import com.example.project_microservice.dto.project.ProjectUpdateDto;
-import com.example.project_microservice.manager.ProjectManager;
+import com.example.project_microservice.manager.project.ProjectManager;
 import com.example.project_microservice.utils.Paths;
 import jakarta.validation.Valid;
 import lombok.AccessLevel;

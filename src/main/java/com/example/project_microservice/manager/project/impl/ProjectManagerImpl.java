@@ -1,10 +1,10 @@
-package com.example.project_microservice.manager.impl;
+package com.example.project_microservice.manager.project.impl;
 
 import com.example.project_microservice.dto.project.ProjectCreateDto;
 import com.example.project_microservice.dto.project.ProjectDto;
 import com.example.project_microservice.dto.project.ProjectFilterDto;
 import com.example.project_microservice.dto.project.ProjectUpdateDto;
-import com.example.project_microservice.manager.ProjectManager;
+import com.example.project_microservice.manager.project.ProjectManager;
 import com.example.project_microservice.mapper.project.ProjectMapper;
 import com.example.project_microservice.model.project.Project;
 import com.example.project_microservice.service.project.ProjectService;

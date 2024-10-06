@@ -6,11 +6,15 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Getter
 @Setter
@@ -33,6 +37,13 @@ public class Project extends BaseEntity {
 
     @Column(name = "privacy", nullable = false)
     private boolean privacy;
+
+    @ManyToOne
+    @JoinColumn(name = "parent_id")
+    private Project parentProject;
+
+    @OneToMany(mappedBy = "parentProject")
+    private List<Project> subProjects;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;

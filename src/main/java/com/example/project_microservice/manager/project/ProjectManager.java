@@ -1,4 +1,4 @@
-package com.example.project_microservice.manager;
+package com.example.project_microservice.manager.project;
 
 import com.example.project_microservice.dto.project.ProjectCreateDto;
 import com.example.project_microservice.dto.project.ProjectDto;
