@@ -24,5 +24,7 @@ public class VacancyManagerImpl implements VacancyManager {
     @Transactional
     public VacancyDto create(CreateVacancyDto dto) {
         Vacancy vacancy = vacancyMapper.toEntity(dto);
+        vacancyService.saveOrUpdate(vacancy);
+        return vacancyMapper.toDto(vacancy);
     }
 }

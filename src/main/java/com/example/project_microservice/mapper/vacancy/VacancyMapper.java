@@ -8,7 +8,5 @@ public interface VacancyMapper {
 
     Vacancy toEntity(CreateVacancyDto dto);
 
-    Vacancy toEntity(VacancyDto dto);
-
     VacancyDto toDto(Vacancy vacancy);
 }

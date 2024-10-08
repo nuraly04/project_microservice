@@ -26,7 +26,7 @@ public class VacancyMapperImpl implements VacancyMapper {
 
     @Override
     public Vacancy toEntity(CreateVacancyDto dto) {
-        List<RefCommonReference> referenceList = new ArrayList<>(referenceService.findByIds(dto.getReferenceIds());
+        List<RefCommonReference> referenceList = new ArrayList<>(referenceService.findByIds(dto.getReferenceIds()));
 
         Vacancy vacancy = new Vacancy();
         vacancy.setTitle(dto.getTitle());
@@ -38,8 +38,14 @@ public class VacancyMapperImpl implements VacancyMapper {
     }
 
     @Override
-    public Vacancy toEntity(VacancyDto dto) {
-
-
+    public VacancyDto toDto(Vacancy vacancy) {
+        VacancyDto dto = new VacancyDto();
+        dto.setId(vacancy.getId());
+        dto.setTitle(vacancy.getTitle());
+        dto.setDescription(vacancy.getDescription());
+        dto.setProjectId(vacancy.getProject().getId());
+        dto.setMainReferenceId(vacancy.getMainReference().getId());
+        dto.setReferenceIds(vacancy.getReferences().stream().map(RefCommonReference::getId).toList());
+        return dto;
     }
 }
