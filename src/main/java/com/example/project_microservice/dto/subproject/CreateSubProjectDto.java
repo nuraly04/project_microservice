@@ -1,6 +1,7 @@
 package com.example.project_microservice.dto.subproject;
 
 import com.example.project_microservice.dto.project.ProjectCreateDto;
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,6 +15,6 @@ import lombok.NoArgsConstructor;
 @EqualsAndHashCode(callSuper = true)
 public class CreateSubProjectDto extends ProjectCreateDto {
 
+    @NotNull
     Long parentId;
-
 }

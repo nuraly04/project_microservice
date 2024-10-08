@@ -5,7 +5,7 @@ import com.example.project_microservice.exception.DataNotFoundException;
 import com.example.project_microservice.model.project.Project;
 import com.example.project_microservice.repository.project.ProjectRepository;
 import com.example.project_microservice.service.project.ProjectService;
-import com.example.project_microservice.utils.enums.ProjectStatusEnum;
+import com.example.project_microservice.utils.enums.ProjectStatus;
 import com.querydsl.core.BooleanBuilder;
 import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
@@ -17,7 +17,7 @@ import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
 
-import static com.example.project_microservice.model.QProject.project;
+import static com.example.project_microservice.model.project.QProject.project;
 import static java.util.Objects.nonNull;
 
 @Service
@@ -31,7 +31,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Transactional
     public Project create(Long userId, Project project) {
         project.setOwnerId(userId);
-        project.setStatus(ProjectStatusEnum.CREATED);
+        project.setStatus(ProjectStatus.CREATED);
         return projectRepository.save(project);
     }
 

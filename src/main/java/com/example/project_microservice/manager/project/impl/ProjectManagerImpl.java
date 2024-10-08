@@ -39,8 +39,8 @@ public class ProjectManagerImpl implements ProjectManager {
     @Override
     @Transactional
     public ProjectDto update(Long userId, Long projectId, ProjectUpdateDto dto) {
-        projectValidator.validateTitleToUpdate(userId, projectId, dto.getTitle());
         Project project = projectService.findById(projectId);
+        projectValidator.validateTitleToUpdate(userId, project, dto.getTitle());
         projectMapper.toUpdate(dto, project);
         return projectMapper.toDto(project);
     }

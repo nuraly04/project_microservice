@@ -1,6 +1,6 @@
 package com.example.project_microservice.utils.enums;
 
-public enum ProjectStatusEnum {
+public enum ProjectStatus {
 
     CREATED,
     CLOSED,

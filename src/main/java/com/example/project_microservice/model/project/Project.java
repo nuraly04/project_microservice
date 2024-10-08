@@ -1,7 +1,9 @@
 package com.example.project_microservice.model.project;
 
 import com.example.project_microservice.model.base.BaseEntity;
-import com.example.project_microservice.utils.enums.ProjectStatusEnum;
+import com.example.project_microservice.model.internship.Internship;
+import com.example.project_microservice.utils.enums.ProjectMovement;
+import com.example.project_microservice.utils.enums.ProjectStatus;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -33,7 +35,11 @@ public class Project extends BaseEntity {
 
     @Column(name = "status", nullable = false)
     @Enumerated(value = EnumType.STRING)
-    private ProjectStatusEnum status;
+    private ProjectStatus status;
+
+    @Column(name = "movement")
+    @Enumerated(value = EnumType.STRING)
+    private ProjectMovement movement;
 
     @Column(name = "privacy", nullable = false)
     private boolean privacy;
@@ -44,6 +50,9 @@ public class Project extends BaseEntity {
 
     @OneToMany(mappedBy = "parentProject")
     private List<Project> subProjects;
+
+    @OneToMany(mappedBy = "project")
+    private List<Internship> internships;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;

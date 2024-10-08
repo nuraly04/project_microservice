@@ -21,9 +21,8 @@ public class ProjectValidator {
         }
     }
 
-    public void validateTitleToUpdate(Long userId, Long projectId, String title) {
-        Project currentProject = projectService.findById(projectId);
-        if (!currentProject.getTitle().equals(title)) {
+    public void validateTitleToUpdate(Long userId, Project project, String title) {
+        if (!project.getTitle().equals(title)) {
             validateTitle(userId, title);
         }
     }
