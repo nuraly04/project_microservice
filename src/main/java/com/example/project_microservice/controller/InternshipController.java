@@ -47,7 +47,7 @@ public class InternshipController {
     public InternshipDto update(
             @PathVariable Long internshipId,
             @RequestBody UpdateInternshipDto dto
-            ) {
+    ) {
         return internshipManager.update(internshipId, dto);
     }
 
@@ -58,12 +58,12 @@ public class InternshipController {
         return internshipManager.getAll(filterDto);
     }
 
-    @GetMapping
+    @GetMapping("/mentor")
     public List<InternshipDto> getByMentor(@RequestParam Long mentorId) {
         return internshipManager.getByMentor(mentorId);
     }
 
-    @GetMapping
+    @GetMapping("/intern")
     public List<InternshipDto> getByIntern(@RequestParam Long internId) {
         return internshipManager.getByMentor(internId);
     }

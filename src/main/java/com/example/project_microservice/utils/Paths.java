@@ -10,4 +10,6 @@ public class Paths {
 
     //Internships
     public static final String INTERNSHIP = API + "/internships";
+
+    public static final String VACANCY = API + "/vacancies";
 }

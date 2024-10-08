@@ -1,3 +1,22 @@
+CREATE TABLE IF NOT EXISTS ref_common_reference_type
+(
+    id BIGSERIAL PRIMARY KEY,
+    code VARCHAR(124) UNIQUE NOT NULL,
+    name VARCHAR(254) NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS ref_common_reference
+(
+    id BIGSERIAL PRIMARY KEY,
+    type BIGINT NOT NULL,
+    code VARCHAR(124) UNIQUE NOT NULL,
+    name VARCHAR(254) NOT NULL,
+    parent_id BIGINT,
+
+    CONSTRAINT fk_type FOREIGN KEY (type) REFERENCES ref_common_reference_type (id),
+    CONSTRAINT fk_parent_id FOREIGN KEY (parent_id) REFERENCES ref_common_reference (id)
+);
+
 CREATE TABLE IF NOT EXISTS project
 (
     id          BIGSERIAL PRIMARY KEY,
@@ -39,6 +58,18 @@ CREATE TABLE IF NOT EXISTS member
     user_id BIGINT NOT NULL
 );
 
+CREATE TABLE IF NOT EXISTS vacancy
+(
+    id BIGSERIAL PRIMARY KEY,
+    title VARCHAR(124) NOT NULL,
+    description TEXT NOT NULL,
+    project_id BIGINT NOT NULL,
+    main_reference BIGINT NOT NULL,
+
+    CONSTRAINT fk_project_id FOREIGN KEY (project_id) REFERENCES project (id),
+    CONSTRAINT fk_main_reference FOREIGN KEY (main_reference) REFERENCES ref_common_reference (id)
+);
+
 CREATE TABLE IF NOT EXISTS security_role
 (
     id   BIGSERIAL PRIMARY KEY,
@@ -75,4 +106,14 @@ CREATE TABLE IF NOT EXISTS m2m_internship_member
 
     CONSTRAINT fk_internship_id FOREIGN KEY (internship_id) REFERENCES internship (id),
     CONSTRAINT fk_member_id FOREIGN KEY (member_id) REFERENCES member (id)
+);
+
+CREATE TABLE IF NOT EXISTS m2m_vacancy_reference
+(
+    id BIGSERIAL PRIMARY KEY,
+    vacancy_id BIGINT NOT NULL,
+    reference_id BIGINT NOT NULL,
+
+    CONSTRAINT fk_vacancy_id FOREIGN KEY (vacancy_id) REFERENCES vacancy (id),
+    CONSTRAINT fk_reference_id FOREIGN KEY (reference_id) REFERENCES ref_common_reference (id)
 );
