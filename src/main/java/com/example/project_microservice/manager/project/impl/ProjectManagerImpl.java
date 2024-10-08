@@ -39,7 +39,7 @@ public class ProjectManagerImpl implements ProjectManager {
     @Override
     @Transactional
     public ProjectDto update(Long userId, Long projectId, ProjectUpdateDto dto) {
-        Project project = projectService.findById(projectId);
+        Project project = projectService.get(projectId);
         projectValidator.validateTitleToUpdate(userId, project, dto.getTitle());
         projectMapper.toUpdate(dto, project);
         return projectMapper.toDto(project);
@@ -48,7 +48,7 @@ public class ProjectManagerImpl implements ProjectManager {
     @Override
     @Transactional(readOnly = true)
     public ProjectDto get(Long projectId) {
-        return projectMapper.toDto(projectService.findById(projectId));
+        return projectMapper.toDto(projectService.get(projectId));
     }
 
     @Override

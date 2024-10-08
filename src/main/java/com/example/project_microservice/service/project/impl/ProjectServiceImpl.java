@@ -16,6 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import static com.example.project_microservice.model.project.QProject.project;
 import static java.util.Objects.nonNull;
@@ -37,10 +38,16 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     @Transactional
-    public Project findById(Long projectId) {
+    public Project get(Long projectId) {
         return projectRepository.findById(projectId).orElseThrow(
                 () -> new DataNotFoundException("Не найден проект по id:" + projectId)
         );
+    }
+
+    @Override
+    @Transactional
+    public Optional<Project> findById(Long projectId) {
+        return projectRepository.findById(projectId);
     }
 
     @Override
@@ -61,6 +68,12 @@ public class ProjectServiceImpl implements ProjectService {
     @Transactional(readOnly = true)
     public boolean existsByTitleAndOwnerId(String title, Long ownerId) {
         return projectRepository.existsByTitleAndOwnerId(title, ownerId);
+    }
+
+    @Override
+    @Transactional(readOnly = true)
+    public boolean existsByParentAndStatusNotIn(Project parentProject, Collection<ProjectStatus> status) {
+        return projectRepository.existsByParentAndStatusNotIn(parentProject, status);
     }
 
     private void search(BooleanBuilder predicate, ProjectFilterDto filterDto) {

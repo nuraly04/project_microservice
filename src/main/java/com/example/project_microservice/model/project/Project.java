@@ -2,6 +2,7 @@ package com.example.project_microservice.model.project;
 
 import com.example.project_microservice.model.base.BaseEntity;
 import com.example.project_microservice.model.internship.Internship;
+import com.example.project_microservice.model.member.Member;
 import com.example.project_microservice.utils.enums.ProjectMovement;
 import com.example.project_microservice.utils.enums.ProjectStatus;
 import jakarta.persistence.Column;
@@ -9,6 +10,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
 import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
@@ -46,13 +49,19 @@ public class Project extends BaseEntity {
 
     @ManyToOne
     @JoinColumn(name = "parent_id")
-    private Project parentProject;
+    private Project parent;
 
-    @OneToMany(mappedBy = "parentProject")
+    @OneToMany(mappedBy = "parent")
     private List<Project> subProjects;
 
     @OneToMany(mappedBy = "project")
     private List<Internship> internships;
+
+    @ManyToMany
+    @JoinTable(name = "m2m_project_member",
+    joinColumns = @JoinColumn(name = "project_id"),
+    inverseJoinColumns = @JoinColumn(name = "member_id"))
+    private List<Member> members;
 
     @Column(name = "created_at")
     private LocalDateTime createdAt;

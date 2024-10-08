@@ -1,6 +1,6 @@
 package com.example.project_microservice.dto.project;
 
-import com.example.project_microservice.utils.enums.ProjectStatusEnum;
+import com.example.project_microservice.utils.enums.ProjectStatus;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
@@ -15,7 +15,7 @@ public class ProjectUpdateDto {
     @NotBlank(message = "Поле описания не может быть пустым")
     private String description;
 
-    private ProjectStatusEnum status;
+    private ProjectStatus status;
 
     private boolean privacy;
 }

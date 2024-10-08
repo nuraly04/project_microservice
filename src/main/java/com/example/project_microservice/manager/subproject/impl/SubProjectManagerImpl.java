@@ -29,8 +29,9 @@ public class SubProjectManagerImpl implements SubProjectManager {
     @Transactional
     public ProjectDto create(Long userId, CreateSubProjectDto dto) {
         projectValidator.validateTitle(userId, dto.getTitle());
-        Project parentProject = projectService.findById(dto.getParentId());
-        Project subProject = projectMapper.toCreateSubProject(dto, parentProject);
+        Project parentProject = projectService.get(dto.getParentId());
+        Project subProject = projectMapper.toCreateSubProject(dto);
+        subProject.setParent(parentProject);
         subProjectService.saveOrUpdate(subProject);
         return projectMapper.toDto(subProject);
     }
@@ -39,6 +40,7 @@ public class SubProjectManagerImpl implements SubProjectManager {
     @Transactional
     public void closeSubProject(Long subProjectId) {
         Project subProject = subProjectService.findById(subProjectId);
+        projectValidator.validateProjectToClose(subProject);
         subProjectService.closeSubProject(subProject);
     }
 

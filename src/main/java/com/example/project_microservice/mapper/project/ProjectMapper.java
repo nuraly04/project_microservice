@@ -14,8 +14,7 @@ public interface ProjectMapper {
 
     Project toCreate(ProjectCreateDto createDto);
 
-    @Mapping(source = "parentProject", target = "parent")
-    Project toCreateSubProject(ProjectCreateDto createDto, Project parentProject);
+    Project toCreateSubProject(ProjectCreateDto createDto);
 
     void toUpdate(ProjectUpdateDto dto, @MappingTarget Project project);
 
