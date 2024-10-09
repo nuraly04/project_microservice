@@ -59,7 +59,7 @@ public class ProjectController {
         return projectManager.getAll(userId);
     }
 
-    @GetMapping("/list")
+    @PostMapping("/list")
     public List<ProjectDto> getList(
             @PathVariable("userId") Long userId,
             @RequestBody ProjectFilterDto filterDto

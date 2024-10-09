@@ -1,6 +1,7 @@
 package com.example.project_microservice.mapper.vacancy.impl;
 
 import com.example.project_microservice.dto.vacancy.CreateVacancyDto;
+import com.example.project_microservice.dto.vacancy.UpdateVacancyDto;
 import com.example.project_microservice.dto.vacancy.VacancyDto;
 import com.example.project_microservice.mapper.vacancy.VacancyMapper;
 import com.example.project_microservice.model.reference.RefCommonReference;
@@ -47,5 +48,17 @@ public class VacancyMapperImpl implements VacancyMapper {
         dto.setMainReferenceId(vacancy.getMainReference().getId());
         dto.setReferenceIds(vacancy.getReferences().stream().map(RefCommonReference::getId).toList());
         return dto;
+    }
+
+    @Override
+    public Vacancy toUpdate(Vacancy vacancy, UpdateVacancyDto dto) {
+
+        List<RefCommonReference> referenceList = new ArrayList<>(referenceService.findByIds(dto.getReferencesIds()));
+
+        vacancy.setTitle(dto.getTitle());
+        vacancy.setDescription(dto.getDescription());
+        vacancy.setMainReference(referenceService.get(dto.getMainReferenceId()));
+        vacancy.setReferences(referenceList);
+        return vacancy;
     }
 }
